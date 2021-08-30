@@ -4,7 +4,7 @@ function [x, y] = imgCluster(img, k)
     % Shapes image data for fcm use
     big = row*col;
     data = reshape(img,big,3);
-    [center, U] = fcm(data, k, 1.2);%2.8
+    [center, U] = fcm(data, k, 2.8);
     % Initializing reference array
     [ref] = big;
     % Nested loops to iterate through all of U to populate the reference
@@ -32,10 +32,10 @@ function [x, y] = imgCluster(img, k)
         % Opens k windows with the image data from the temp array
         figure,imshow(temp, []);
         % Resizes the image to the correct size per pixel
-        %truesize();
+        truesize();
         for f = 1:row
             for g = 1:col
-                if(temp(row,col,1) > 0.75 && temp(row,col,2) > 0.6)
+                if(temp(row,col,1) > 0.0 && temp(row,col,2) > 0.0)
                     [tumArea] = [tumArea temp(row,col,:)];
                 end
             end
